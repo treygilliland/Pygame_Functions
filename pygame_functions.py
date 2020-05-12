@@ -60,7 +60,7 @@ screen = ""
 
 class Background():
     def __init__(self):
-        self.colour = pygame.Color("black")
+        self.color = pygame.Color("black")
 
     def setTiles(self, tiles):
         if type(tiles) is str:
@@ -93,9 +93,9 @@ class Background():
 
         self.surface = screen.copy()
 
-    def setColour(self, colour):
-        self.colour = parseColour(colour)
-        screen.fill(self.colour)
+    def setcolor(self, color):
+        self.color = parsecolor(color)
+        screen.fill(self.color)
         pygame.display.update()
         self.surface = screen.copy()
 
@@ -163,11 +163,11 @@ class newTextBox(pygame.sprite.Sprite):
         pygame.draw.rect(self.image, (0, 0, 0), [0, 0, width - 1, self.boxSize - 1], 2)
         self.rect = self.image.get_rect()
         self.fontFace = pygame.font.match_font("Arial")
-        self.fontColour = pygame.Color("black")
-        self.initialColour = (180, 180, 180)
+        self.fontcolor = pygame.Color("black")
+        self.initialcolor = (180, 180, 180)
         self.font = pygame.font.Font(self.fontFace, fontSize)
         self.rect.topleft = [xpos, ypos]
-        newSurface = self.font.render(self.initialText, True, self.initialColour)
+        newSurface = self.font.render(self.initialText, True, self.initialcolor)
         self.image.blit(newSurface, [10, 5])
 
     def update(self, keyevent):
@@ -197,7 +197,7 @@ class newTextBox(pygame.sprite.Sprite):
                         self.text = self.text[0:len(self.text) - 1]
                         self.image.fill((255, 255, 255))
                         pygame.draw.rect(self.image, (0, 0, 0), [0, 0, self.width - 1, self.boxSize - 1], 2)
-                        newSurface = self.font.render(self.text, True, self.fontColour)
+                        newSurface = self.font.render(self.text, True, self.fontcolor)
                         self.image.blit(newSurface, [10, 5])
                         updateDisplay()
                         nexttime = thistime + 50
@@ -207,7 +207,7 @@ class newTextBox(pygame.sprite.Sprite):
 
         self.image.fill((255, 255, 255))
         pygame.draw.rect(self.image, (0, 0, 0), [0, 0, self.width - 1, self.boxSize - 1], 2)
-        newSurface = self.font.render(self.text, True, self.fontColour)
+        newSurface = self.font.render(self.text, True, self.fontcolor)
         self.image.blit(newSurface, [10, 5])
         if screenRefresh:
             updateDisplay()
@@ -221,17 +221,17 @@ class newTextBox(pygame.sprite.Sprite):
     def clear(self):
         self.image.fill((255, 255, 255))
         pygame.draw.rect(self.image, (0, 0, 0), [0, 0, self.width - 1, self.boxSize - 1], 2)
-        newSurface = self.font.render(self.initialText, True, self.initialColour)
+        newSurface = self.font.render(self.initialText, True, self.initialcolor)
         self.image.blit(newSurface, [10, 5])
         if screenRefresh:
             updateDisplay()
 
 
 class newLabel(pygame.sprite.Sprite):
-    def __init__(self, text, fontSize, font, fontColour, xpos, ypos, background):
+    def __init__(self, text, fontSize, font, fontcolor, xpos, ypos, background):
         pygame.sprite.Sprite.__init__(self)
         self.text = text
-        self.fontColour = parseColour(fontColour)
+        self.fontcolor = parsecolor(fontcolor)
         self.fontFace = pygame.font.match_font(font)
         self.fontSize = fontSize
         self.background = background
@@ -239,12 +239,12 @@ class newLabel(pygame.sprite.Sprite):
         self.renderText()
         self.rect.topleft = [xpos, ypos]
 
-    def update(self, newText, fontColour, background):
+    def update(self, newText, fontcolor, background):
         self.text = newText
-        if fontColour:
-            self.fontColour = parseColour(fontColour)
+        if fontcolor:
+            self.fontcolor = parsecolor(fontcolor)
         if background:
-            self.background = parseColour(background)
+            self.background = parsecolor(background)
 
         oldTopLeft = self.rect.topleft
         self.renderText()
@@ -258,7 +258,7 @@ class newLabel(pygame.sprite.Sprite):
         maxWidth = 0
         maxHeight = 0
         for line in textLines:
-            lineSurfaces.append(self.font.render(line, True, self.fontColour))
+            lineSurfaces.append(self.font.render(line, True, self.fontcolor))
             thisRect = lineSurfaces[-1].get_rect()
             if thisRect.width > maxWidth:
                 maxWidth = thisRect.width
@@ -267,7 +267,7 @@ class newLabel(pygame.sprite.Sprite):
         self.image = pygame.Surface((maxWidth, (self.fontSize + 1) * len(textLines) + 5), pygame.SRCALPHA, 32)
         self.image.convert_alpha()
         if self.background != "clear":
-            self.image.fill(parseColour(self.background))
+            self.image.fill(parsecolor(self.background))
         linePos = 0
         for lineSurface in lineSurfaces:
             self.image.blit(lineSurface, [0, linePos])
@@ -300,7 +300,7 @@ def screenSize(sizex, sizey, xpos=None, ypos=None, fullscreen=False):
     else:
         screen = pygame.display.set_mode([sizex, sizey])
     background = Background()
-    screen.fill(background.colour)
+    screen.fill(background.color)
     pygame.display.set_caption("Graphics Window")
     background.surface = screen.copy()
     pygame.display.update()
@@ -342,8 +342,8 @@ def killSprite(sprite):
         updateDisplay()
 
 
-def setBackgroundColour(colour):
-    background.setColour(colour)
+def setBackgroundcolor(color):
+    background.setcolor(color)
     if screenRefresh:
         updateDisplay()
 
@@ -441,43 +441,43 @@ def pause(milliseconds, allowEsc=True):
         current_time = pygame.time.get_ticks()
 
 
-def drawRect(xpos, ypos, width, height, colour, linewidth=0):
+def drawRect(xpos, ypos, width, height, color, linewidth=0):
     global bgSurface
-    colour = parseColour(colour)
-    thisrect = pygame.draw.rect(screen, colour, [xpos, ypos, width, height], linewidth)
+    color = parsecolor(color)
+    thisrect = pygame.draw.rect(screen, color, [xpos, ypos, width, height], linewidth)
     if screenRefresh:
         pygame.display.update(thisrect)
 
 
-def drawLine(x1, y1, x2, y2, colour, linewidth=1):
+def drawLine(x1, y1, x2, y2, color, linewidth=1):
     global bgSurface
-    colour = parseColour(colour)
-    thisrect = pygame.draw.line(screen, colour, (x1, y1), (x2, y2), linewidth)
+    color = parsecolor(color)
+    thisrect = pygame.draw.line(screen, color, (x1, y1), (x2, y2), linewidth)
     if screenRefresh:
         pygame.display.update(thisrect)
 
 
-def drawPolygon(pointlist, colour, linewidth=0):
+def drawPolygon(pointlist, color, linewidth=0):
     global bgSurface
-    colour = parseColour(colour)
-    thisrect = pygame.draw.polygon(screen, colour, pointlist, linewidth)
+    color = parsecolor(color)
+    thisrect = pygame.draw.polygon(screen, color, pointlist, linewidth)
     if screenRefresh:
         pygame.display.update(thisrect)
 
 
-def drawEllipse(centreX, centreY, width, height, colour, linewidth=0):
+def drawEllipse(centreX, centreY, width, height, color, linewidth=0):
     global bgSurface
-    colour = parseColour(colour)
+    color = parsecolor(color)
     thisrect = pygame.Rect(centreX - width / 2, centreY - height / 2, width, height)
-    pygame.draw.ellipse(screen, colour, thisrect, linewidth)
+    pygame.draw.ellipse(screen, color, thisrect, linewidth)
     if screenRefresh:
         pygame.display.update(thisrect)
 
 
-def drawTriangle(x1, y1, x2, y2, x3, y3, colour, linewidth=0):
+def drawTriangle(x1, y1, x2, y2, x3, y3, color, linewidth=0):
     global bgSurface
-    colour = parseColour(colour)
-    thisrect = pygame.draw.polygon(screen, colour, [(x1, y1), (x2, y2), (x3, y3)], linewidth)
+    color = parsecolor(color)
+    thisrect = pygame.draw.polygon(screen, color, [(x1, y1), (x2, y2), (x3, y3)], linewidth)
     if screenRefresh:
         pygame.display.update(thisrect)
 
@@ -571,9 +571,9 @@ def keyPressed(keyCheck=""):
     return False
 
 
-def makeLabel(text, fontSize, xpos, ypos, fontColour='black', font='Arial', background="clear"):
+def makeLabel(text, fontSize, xpos, ypos, fontcolor='black', font='Arial', background="clear"):
     # make a text sprite
-    thisText = newLabel(text, fontSize, font, fontColour, xpos, ypos, background)
+    thisText = newLabel(text, fontSize, font, fontcolor, xpos, ypos, background)
     return thisText
 
 
@@ -583,8 +583,8 @@ def moveLabel(sprite, x, y):
         updateDisplay()
 
 
-def changeLabel(textObject, newText, fontColour=None, background=None):
-    textObject.update(newText, fontColour, background)
+def changeLabel(textObject, newText, fontcolor=None, background=None):
+    textObject.update(newText, fontcolor, background)
     # updateDisplay()
 
 
@@ -702,16 +702,16 @@ def spriteClicked(sprite):
         return False
 
 
-def parseColour(colour):
-    if type(colour) == str:
-        # check to see if valid colour
-        return pygame.Color(colour)
+def parsecolor(color):
+    if type(color) == str:
+        # check to see if valid color
+        return pygame.Color(color)
     else:
-        colourRGB = pygame.Color("white")
-        colourRGB.r = colour[0]
-        colourRGB.g = colour[1]
-        colourRGB.b = colour[2]
-        return colourRGB
+        colorRGB = pygame.Color("white")
+        colorRGB.r = color[0]
+        colorRGB.g = color[1]
+        colorRGB.b = color[2]
+        return colorRGB
 
 
 def mouseX():
