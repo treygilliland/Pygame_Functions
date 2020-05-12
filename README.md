@@ -1,65 +1,58 @@
 # Pygame Functions
 
-Originally created by StevePaget. 
+## To use:
 
-Check out the wiki at https://github.com/StevePaget/Pygame_Functions/wiki
+1. Place the pygame_functions.py file in the same directory as your main .py file.
 
-See video tutorials at https://www.youtube.com/playlist?list=PLeOSHd3t9lzKr4O3A3Q7OZyf8QwyCALyn
-
-
-## To use  
-
-Write this command at the top of your main .py file
+2. Write this command at the top of your main .py file
 ```
 from pygame_functions import *
 ```
 
-Note  
-This import initializes both pygame and pygame.mixer for use in your game.
+>Note:
+This import initializes both pygame and pygame.mixer for use in your game.  
 
-## What Pygame Funcitons provides  
-### Variables
-spriteGroup - manage sprite objects here
+3. Finally, use the screenSize() function to create a screen object for your game.
 
-textboxGroup - manage textbox objects here
+```
+screenSize(SCREEN_WIDTH, SCREEN_HEIGHT)
+```
 
-hiddenSprites - manage hidden sprites here
+You can now use any class, functions, variables included in this wrapper :)  
 
-gameClock - Clock instance
+See below for an overview of included variables, classes, and functions.
 
-musicPaused - flag for pausing music
+## What pygame_functions.py provides:
+### Global Variables
+> Note: These variables are mostly manipulated using related functions (see below) but can be manipulated directly.
 
-background??? -
+spriteGroup - manage sprite objects here  
+textboxGroup - manage textbox objects here  
+hiddenSprites - manage hidden sprites here  
 
-screenRefresh??? - flag for enabling screen refresh
+gameClock - clock instance  
+screen - screen instance  
+background - background instance  
 
-screen??? - 
+musicPaused - flag for pausing music  
+screenRefresh - flag for enabling screen refresh  
 
-keydict - maps key string to pygame enum representation
-ex   "space" == pygame.K_SPACE
+keydict - maps key strings to pygame key representation
+> ex: "space" == pygame.K_SPACE
 
-### Classes
+### Classes (signatures)
 
-Background() 
+Background()
 
-	setTiles(tiles) - takes in a path to tiles and adds variables to object
-
-	scroll(x, y)
-
-	setcolor(color) - sets background color
-
-
-newSprite(filename, frames) (extends pygame.sprite.Sprite)
-
-newTextBox(text, xpos, ypos, width, case, maxLength, fontSize) (extends pygame.sprite.Sprite)
-
-newLabel(text, fontSize, font, fontcolor, xpos, ypos, background)
+newSprite(filename, frames)  
+newTextBox(text, xpos, ypos, width, case, maxLength, fontSize)  
+newLabel(text, fontSize, font, fontColour, xpos, ypos, background)
 
 ### Functions
 
-System  
-	loadImage(fileName, useColorKey=False)  
-		- makeImage(filename)  
+System:
+>	loadImage(fileName, useColorKey=False)  
+	makeImage(filename) (Note: same as loadImage)  
 	screenSize(sizex, sizey, xpos=None, ypos=None, fullscreen=False)  
 	pause(milliseconds, allowEsc=True)  
 	end()  
@@ -67,16 +60,16 @@ System
 	clock()  
 	tick(fps)  
 	updateDisplay()  
-	parsecolor(color)  
+	parseColour(colour)  
 	setAutoUpdate(val)  
 
-Background  
-	setBackgroundcolor(color)  
+Background:  
+>	setBackgroundColour(colour)  
 	setBackgroundImage(img)  
 	scrollBackground(x, y)  
 
 Sprites  
-	moveSprite(sprite, x, y, centre=False)  
+>	moveSprite(sprite, x, y, centre=False)  
 	rotateSprite(sprite, angle)  
 	transformSprite(sprite, angle, scale, hflip=False, vflip=False)  
 	killSprite(sprite)  
@@ -93,16 +86,16 @@ Sprites
 	allTouching(spritename)  
 
 Shapes  
-	drawRect(xpos, ypos, width, height, color, linewidth=0)  
-	drawLine(x1, y1, x2, y2, color, linewidth=1)  
-	drawPolygon(pointlist, color, linewidth=0)  
-	drawEllipse(centreX, centreY, width, height, color, linewidth=0)  
-	drawTriangle(x1, y1, x2, y2, x3, y3, color, linewidth=0)  
+>	drawRect(xpos, ypos, width, height, colour, linewidth=0)  
+	drawLine(x1, y1, x2, y2, colour, linewidth=1)  
+	drawPolygon(pointlist, colour, linewidth=0)  
+	drawEllipse(centreX, centreY, width, height, colour, linewidth=0)  
+	drawTriangle(x1, y1, x2, y2, x3, y3, colour, linewidth=0)  
 	clearShapes()  
 	updateShapes()  
 
 Sounds  
-	makeSound(filename)  
+>	makeSound(filename)  
 	playSound(sound, loops=0)  
 	stopSound(sound)  
 	playSoundAndWait(sound)  
@@ -113,9 +106,9 @@ Sounds
 	rewindMusic()  
 
 Text  
-	makeLabel(text, fontSize, xpos, ypos, fontcolor='black', font='Arial', background="clear")  
+>	makeLabel(text, fontSize, xpos, ypos, fontColour='black', font='Arial', background="clear")  
 	moveLabel(sprite, x, y)  
-	changeLabel(textObject, newText, fontcolor=None, background=None)  
+	changeLabel(textObject, newText, fontColour=None, background=None)  
 	showLabel(labelName)  
 	hideLabel(labelName)  
 	makeTextBox(xpos, ypos, width, case=0, startingText="Please type here", maxLength=0, fontSize=22)  
@@ -124,7 +117,7 @@ Text
 	hideTextBox(textBoxName)  
 
 Mouse & Keyboard  
-	waitPress()  
+>	waitPress()  
 	keyPressed(keyCheck="")  
 	mousePressed()  
 	spriteClicked(sprite)  
